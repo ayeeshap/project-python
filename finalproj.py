@@ -310,14 +310,14 @@ class Tweet():
         
 print "Now collecting the name of the book, the emo score, the favorites counts, and the retweets counts for each tweet..."
 for a in dictionary2: # in your list of tuples
-    b = Tweet(a[0], a[1]) 
+    b = Tweet(a[0], a[1], pos_ws, neg_ws) 
 
 print "Now writing the name, the emo score, the favorites counts, and the retweets counts for each tweet to a csv file..."      
 outfile = open("bestsellinglists1.csv","w")
 total_tweets = dictionary2
 outfile.write('"novel name", "emo score", favourites counts, retweets counts\n')
 for a in total_tweets:
-    b = Tweet(a[0], a[1]) 
+    b = Tweet(a[0], a[1], pos_ws, neg_ws) 
     tweets = (b.novelname, b.emo_score(), b.favouritescount, b.retweet_count)
     outfile.write('"%s","%d", %d, %d\n' % tweets)
 outfile.close()
@@ -328,7 +328,7 @@ a = outfile.readlines()
 c = sorted(a, key = lambda x: x.count('0'), reverse = True)
 print pretty(c[1:]) 
 
-print "Now searching each book on the hardcover non fiction best seller list on twitter..."
+print "Now searching each book on the hardcover non fiction best seller list on Twitter..."
 def get_tweetlist(x):
     tweetlist = []
     for a in x:
@@ -353,7 +353,7 @@ dictionary2 = (all_tweetlist(dictionary1))
 
 class Tweet():
     """object representing one tweet"""
-    def __init__(self, tweet_dict, novelname):
+    def __init__(self, tweet_dict, novelname, pos_ws, neg_ws): #I included pos and neg so they could be saved as local instance variables rather than keep them as only global variables
         if 'text' in tweet_dict:
             self.text = tweet_dict['text']
         else:
@@ -367,11 +367,12 @@ class Tweet():
         else:
             self.retweet_count = 0
         self.novelname = novelname
+        self.pos_ws = pos_ws
         
             
     def positive(self):
         accum_pos = 0
-        for a in pos_ws:
+        for a in self.pos_ws:
             if a in self.text:
                 accum_pos = accum_pos + 1 
         return accum_pos
@@ -380,7 +381,7 @@ class Tweet():
         accum_neg = 0
         c = self.text.split()
         for b in c:
-            if b in neg_ws:
+            if b in self.neg_ws:
                 accum_neg = accum_neg + 1 
         return accum_neg
 
@@ -389,14 +390,14 @@ class Tweet():
 
 print "Now collecting the name of the book, the emo score, the favorites counts, and the retweets counts for each tweet..."
 for a in dictionary2: # in your list of tuples
-    b = Tweet(a[0], a[1]) 
+    b = Tweet(a[0], a[1], pos_ws, neg_ws) 
 
 print "Now writing the name, the emo score, the favorites counts, and the retweets counts for each tweet to a csv file..."      
 outfile = open("bestsellinglists2.csv","w")
 total_tweets = dictionary2
 outfile.write('"novel name", "emo score", favourites counts, retweets counts\n')
 for a in total_tweets:
-    b = Tweet(a[0], a[1]) 
+    b = Tweet(a[0], a[1], pos_ws, neg_ws) 
     tweets = (b.novelname, b.emo_score(), b.favouritescount, b.retweet_count)
     outfile.write('"%s","%d", %d, %d\n' % tweets)
 outfile.close()
@@ -432,7 +433,7 @@ dictionary2 = (all_tweetlist(dictionary1))
 
 class Tweet():
     """object representing one tweet"""
-    def __init__(self, tweet_dict, novelname):
+    def __init__(self, tweet_dict, novelname, pos_ws, neg_ws):
         if 'text' in tweet_dict:
             self.text = tweet_dict['text']
         else:
@@ -446,11 +447,13 @@ class Tweet():
         else:
             self.retweet_count = 0
         self.novelname = novelname
+        self.pos_ws = pos_ws
+        self.neg_ws = neg_ws
         
             
     def positive(self):
         accum_pos = 0
-        for a in pos_ws:
+        for a in self.pos_ws:
             if a in self.text:
                 accum_pos = accum_pos + 1 
         return accum_pos
@@ -459,7 +462,7 @@ class Tweet():
         accum_neg = 0
         c = self.text.split()
         for b in c:
-            if b in neg_ws:
+            if b in self.neg_ws:
                 accum_neg = accum_neg + 1 
         return accum_neg
 
@@ -468,14 +471,14 @@ class Tweet():
         
 print "Now collecting the name of the book, the emo score, the favorites counts, and the retweets counts for each tweet..."
 for a in dictionary2: # in your list of tuples
-    b = Tweet(a[0], a[1]) 
+    b = Tweet(a[0], a[1], pos_ws, neg_ws) 
  
 print "Now writing the name, the emo score, the favorites counts, and the retweets counts for each tweet to a csv file..."     
 outfile = open("bestsellinglists3.csv","w")
 total_tweets = dictionary2
 outfile.write('"novel name", "emo score", favourites counts, retweets counts\n')
 for a in total_tweets:
-    b = Tweet(a[0], a[1]) 
+    b = Tweet(a[0], a[1], pos_ws, neg_ws) 
     tweets = (b.novelname, b.emo_score(), b.favouritescount, b.retweet_count)
     outfile.write('"%s","%d", %d, %d\n' % tweets)
 outfile.close()
@@ -510,7 +513,7 @@ dictionary2 = (all_tweetlist(dictionary1))
 
 class Tweet():
     """object representing one tweet"""
-    def __init__(self, tweet_dict, novelname):
+    def __init__(self, tweet_dict, novelname, pos_ws, neg_ws):
         if 'text' in tweet_dict:
             self.text = tweet_dict['text']
         else:
@@ -524,11 +527,13 @@ class Tweet():
         else:
             self.retweet_count = 0
         self.novelname = novelname
+        self.pos_ws = pos_ws
+        self.neg_ws = neg_ws
         
             
     def positive(self):
         accum_pos = 0
-        for a in pos_ws:
+        for a in self.pos_ws:
             if a in self.text:
                 accum_pos = accum_pos + 1 
         return accum_pos
@@ -537,7 +542,7 @@ class Tweet():
         accum_neg = 0
         c = self.text.split()
         for b in c:
-            if b in neg_ws:
+            if b in self.neg_ws:
                 accum_neg = accum_neg + 1 
         return accum_neg
 
@@ -546,14 +551,14 @@ class Tweet():
 
 print "Now collecting the name of the book, the emo score, the favorites counts, and the retweets counts for each tweet..."
 for a in dictionary2: # in your list of tuples
-    b = Tweet(a[0], a[1]) 
+    b = Tweet(a[0], a[1], pos_ws, neg_ws) 
 
 print "Now writing the name, the emo score, the favorites counts, and the retweets counts for each tweet to a csv file..."     
 outfile = open("bestsellinglists4.csv","w")
 total_tweets = dictionary2
 outfile.write('"novel name", "emo score", favourites counts, retweets counts\n')
 for a in total_tweets:
-    b = Tweet(a[0], a[1]) 
+    b = Tweet(a[0], a[1], pos_ws, neg_ws) 
     tweets = (b.novelname, b.emo_score(), b.favouritescount, b.retweet_count)
     outfile.write('"%s","%d", %d, %d\n' % tweets)
 outfile.close()
